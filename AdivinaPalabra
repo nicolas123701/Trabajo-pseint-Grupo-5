@@ -1,0 +1,52 @@
+Proceso AdivinaPalabra
+    // Declarar variables
+    Definir palabraOculta, palabraMostrada, letraIngresada Como Caracter;
+    Definir intentos, i Como Entero;
+    Definir letraCorrecta Como Logico;
+    
+    // Inicializar variables
+    palabraOculta <- "desarrollo"; // La palabra a adivinar
+ <- Largo(palabraOculta); // Longitud de la palabra oculta
+    palabraMostrada <- ""; // Inicializar la palabra mostrada
+    
+    Para i <- 1 Hasta  Hacer
+        palabraMostrada <- palabraMostrada  "_"; // Construir la palabra mostrada con guiones bajos
+    FinPara
+    
+    intentos <- 6; // Número máximo de intentos permitidos
+    
+    // Mensaje de bienvenida
+    Escribir "Bienvenido al juego de adivinar la palabra.";
+    Escribir "La palabra tiene ", longitud, " letras.";
+    
+    // Bucle principal del juego
+    Mientras intentos > 0 Y Encontrar("_", palabraMostrada) > 0 Hacer
+        Escribir "Palabra actual: ", palabraMostrada;
+        Escribir "Tienes ", intentos, " intentos restantes.";
+        Escribir "Introduce una letra: ";
+        Leer letraIngresada;
+        
+        letraCorrecta <- Falso;
+        
+        // Verificar si la letra está en la palabra oculta
+        Para i <- 1 Hasta longitud Hacer
+            Si Subcadena(palabraOculta, i, 1) = letraIngresada Entonces
+                palabraMostrada <- Reemplazar(palabraMostrada, Subcadena(palabraMostrada, i, 1), letraIngresada, i, i);
+                letraCorrecta <- Verdadero;
+            FinSi;
+        FinPara;
+        
+        // Decrementar el número de intentos si la letra no está en la palabra oculta
+        Si No letraCorrecta Entonces
+            intentos <- intentos - 1;
+        FinSi;
+    FinMientras;
+    
+    // Mensaje final
+    Si Encontrar("_", palabraMostrada) = 0 Entonces
+        Escribir "¡Felicidades! Has adivinado la palabra: ", palabraOculta;
+    Sino
+        Escribir "Lo siento, has agotado tus intentos. La palabra era: ", palabraOculta;
+    FinSi;
+    
+FinProceso
